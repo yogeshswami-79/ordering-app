@@ -9,7 +9,7 @@ export class OrdersController {
 
   @Post()
   async createOrder(@Body() request: CreateOrderRequest): Promise<Order> {
-    return await this.ordersService.createOrderRequest(request);
+    return await this.ordersService.createOrder(request);
   }
 
   @Get()

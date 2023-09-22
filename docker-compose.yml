@@ -1,4 +1,5 @@
 services:
+  
   orders:
     build:
       context: .
@@ -17,6 +18,22 @@ services:
     ports:
       - '3000:3000'
 
+  billing:
+    build:
+      context: .
+      dockerfile: ./apps/billing/Dockerfile
+      target: development
+    command: npm run start:dev billing
+    env_file:
+      - ./apps/billing/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  rabbitmq:
+    image:  rabbitmq
+    ports:
+      - '5672:5672'
   # mongodb-primary:
   #   image: docker.io/bitnami/mongodb:6.0
   #   environment:

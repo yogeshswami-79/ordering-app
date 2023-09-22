@@ -1,4 +1,4 @@
-
+# create new order
 POST http://localhost:3000/orders
 Content-Type: application/json
 
@@ -7,3 +7,9 @@ Content-Type: application/json
     "price": 10,
     "phone": "+91 8107205521"
 }
+
+
+###
+# Get all orders
+GET http://localhost:3000/orders
+Content-Type: application/json
