@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -12,4 +12,8 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule {
+  // constructor(private readonly configService: ConfigService) {
+  //   console.log(configService.get<string>('MONGODB_URI'));
+  // }
+}
