@@ -23,5 +23,8 @@ export class CreateOrderRequest {
 
   @IsEnum(STATUS)
   @IsNotEmpty()
-  status: STATUS;
+  status: {
+    type: STATUS;
+    enum: STATUS;
+  };
 }

@@ -27,6 +27,9 @@ services:
       dockerfile: ./apps/billing/Dockerfile
       target: development
     command: npm run start:dev billing
+    depends_on:
+      - rabbitmq
+      - auth
     env_file:
       - ./apps/billing/.env
     volumes:

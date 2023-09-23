@@ -12,7 +12,7 @@ export class Order extends AbstractDocument {
   @Prop()
   phone: string;
 
-  @Prop()
+  @Prop({ type: String, enum: STATUS })
   status: STATUS;
 }
 

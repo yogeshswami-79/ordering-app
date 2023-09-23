@@ -5,6 +5,7 @@ Content-Type: application/json
 {
     "name": "shirt",
     "price": 10,
+    "status":"PLACED",
     "phone": "+91 8107205521"
 }
 
@@ -15,7 +16,7 @@ PATCH  http://localhost:3000/orders/cancel
 Content-Type: application/json
 
 {
-    "id":"650d9f4a9679351df6bb9ea9"
+    "id":"650f37aa5f8b9b9dcad9bcfd"
 }
 
 

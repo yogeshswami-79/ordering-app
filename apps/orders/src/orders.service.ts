@@ -41,7 +41,7 @@ export class OrdersService {
 
       const status = await this.ordersRepo.findOneAndUpdate(
         { _id: request.id },
-        { status: STATUS.CANCELLED.toString() },
+        { status: STATUS.CANCELLED },
       );
 
       await lastValueFrom(
