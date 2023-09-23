@@ -18,12 +18,12 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     await this.authService.login(user, response);
-    response.send(user);
+    response.send({ email: user.email, uid: user._id });
   }
 
   @UseGuards(JwtAuthGuard)
   @MessagePattern('validate_user')
   async validateUser(@CurrentUser() user: User) {
-    return user;
+    return { email: user.email, uid: user._id };
   }
 }

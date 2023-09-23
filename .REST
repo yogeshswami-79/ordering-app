@@ -28,7 +28,16 @@ Content-Type: application/json
 
 ###
 # --------------------------------------------------    AUTH
+POST http://localhost:3001/auth/users
+Content-Type: application/json
 
+{
+    "email":"yogesh@gmail.com",
+    "password":"password"
+}
+
+
+###
 POST http://localhost:3001/auth/login
 Content-Type: application/json
 
