@@ -1,12 +1,12 @@
 import {
-  IsEnum,
+  // IsEnum,
   IsNotEmpty,
   IsPhoneNumber,
   IsPositive,
   IsString,
   MinLength,
 } from 'class-validator';
-import { STATUS } from '../constants/values';
+// import { STATUS } from '../constants/values';
 
 export class CreateOrderRequest {
   @IsString()
@@ -21,10 +21,10 @@ export class CreateOrderRequest {
   @MinLength(10)
   phone: string;
 
-  @IsEnum(STATUS)
-  @IsNotEmpty()
-  status: {
-    type: STATUS;
-    enum: STATUS;
-  };
+  // @IsEnum(STATUS)
+  // @IsNotEmpty()
+  // status: {
+  //   type: STATUS;
+  //   enum: STATUS;
+  // };
 }

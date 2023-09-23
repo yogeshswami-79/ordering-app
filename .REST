@@ -5,7 +5,6 @@ Content-Type: application/json
 {
     "name": "shirt",
     "price": 10,
-    "status":"PLACED",
     "phone": "+91 8107205521"
 }
 

@@ -18,7 +18,8 @@ export class OrdersService {
   async createOrder(request: CreateOrderRequest): Promise<Order> {
     const session = await this.ordersRepo.startTransaction();
     try {
-      const order = await this.ordersRepo.create(request, { session });
+      const data = { ...request, status: STATUS.PLACED };
+      const order = await this.ordersRepo.create(data, { session });
       await lastValueFrom(
         this.billingClient.emit('order_created', { request }),
       );
