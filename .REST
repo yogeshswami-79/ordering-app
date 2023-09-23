@@ -10,6 +10,16 @@ Content-Type: application/json
 
 
 ###
+# Cancel Order
+PATCH  http://localhost:3000/orders/cancel
+Content-Type: application/json
+
+{
+    "id":"650d9f4a9679351df6bb9ea9"
+}
+
+
+###
 # Get all orders
 GET http://localhost:3000/orders
 Content-Type: application/json

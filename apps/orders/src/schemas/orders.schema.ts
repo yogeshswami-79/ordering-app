@@ -1,6 +1,6 @@
 import { AbstractDocument } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
+import { STATUS } from '../constants/values';
 @Schema({})
 export class Order extends AbstractDocument {
   @Prop()
@@ -11,6 +11,9 @@ export class Order extends AbstractDocument {
 
   @Prop()
   phone: string;
+
+  @Prop()
+  status: STATUS;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

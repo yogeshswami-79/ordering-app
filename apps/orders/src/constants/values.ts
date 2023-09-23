@@ -1,0 +1,7 @@
+export enum STATUS {
+  CANCELLED,
+  PLACED,
+  SHIPPED,
+  PAYMENT_PENDING,
+  DELIVERED,
+}

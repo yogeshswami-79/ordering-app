@@ -5,6 +5,8 @@ import { Order } from './schemas/orders.schema';
 import { BILLING_SERVICE } from './constants/services';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
+import { CancelOrderRequest } from './dto/cancel-order.request';
+import { STATUS } from './constants/values';
 
 @Injectable()
 export class OrdersService {
@@ -25,6 +27,22 @@ export class OrdersService {
     } catch (error) {
       await session.abortTransaction();
       throw error;
+    }
+  }
+
+  async cancelOrder(request: CancelOrderRequest): Promise<boolean> {
+    try {
+      const status = await this.ordersRepo.findOneAndUpdate(
+        { _id: request.id },
+        { status: STATUS.CANCELLED.toString() },
+      );
+      console.log(status);
+      await lastValueFrom(
+        this.billingClient.emit('order_cancelled', { request }),
+      );
+      return !!status;
+    } catch (error) {
+      throw error.message;
     }
   }
 
