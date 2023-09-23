@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { CreateOrderRequest } from './dto/create-order.request';
 import { OrdersRepository } from './orders.repository';
 import { Order } from './schemas/orders.schema';
@@ -32,14 +32,22 @@ export class OrdersService {
 
   async cancelOrder(request: CancelOrderRequest): Promise<boolean> {
     try {
+      const order = await this.ordersRepo.findOne({ _id: request.id });
+
+      if (order.status === STATUS.DELIVERED) {
+        const msg = 'Order already delivered! cannot be canceled';
+        throw new ConflictException(msg);
+      }
+
       const status = await this.ordersRepo.findOneAndUpdate(
         { _id: request.id },
         { status: STATUS.CANCELLED.toString() },
       );
-      console.log(status);
+
       await lastValueFrom(
         this.billingClient.emit('order_cancelled', { request }),
       );
+
       return !!status;
     } catch (error) {
       throw error.message;

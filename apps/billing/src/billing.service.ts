@@ -7,8 +7,4 @@ export class BillingService {
   bill(data: any) {
     this.logger.log(`billing......`, data);
   }
-
-  getHello(): string {
-    return 'Hello World!';
-  }
 }

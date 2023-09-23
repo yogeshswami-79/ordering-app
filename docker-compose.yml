@@ -8,10 +8,13 @@ services:
     command: npm run start:dev orders
     env_file:
       - ./apps/orders/.env
-    # depends_on:
-    #   - mongodb-primary
-    #   - mongodb-secondary
-    #   - mongodb-arbiter
+    depends_on:
+      - billing
+      - auth
+      - rabbitmq
+      # - mongodb-primary
+      # - mongodb-secondary
+      # - mongodb-arbiter
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -30,10 +33,26 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
 
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: npm run start:dev auth
+    ports:
+      - '3001:3001'
+    env_file:
+      - ./apps/auth/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
   rabbitmq:
     image:  rabbitmq
     ports:
       - '5672:5672'
+
+  
   # mongodb-primary:
   #   image: docker.io/bitnami/mongodb:6.0
   #   environment:
